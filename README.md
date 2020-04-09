@@ -1,22 +1,23 @@
-Role Name
+ansible-role-local-private-public-keys
 =========
 
-A brief description of the role goes here.
+When you want to connect to the Ansible controller machine, remotely from another machine, you need to have a pair of public/private keys configured to a user who can access and run Ansible playbooks.
+This role creates a pair of private/public keys and optionally adds the public key to the `authorized_key` file. Then you can take the private key and use it in another machine. For me, I use it in Gitlab, to call my Ansible controller node and run deployment playbooks.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Check the file [defaults/main.yml](./defaults/main.yml) for details.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
@@ -30,9 +31,9 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Milad Kawas. @miladkawas
