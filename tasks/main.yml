@@ -1,0 +1,26 @@
+---
+
+- name: Define the path to the ssh keys
+  set_fact:
+    key_path: "{{ role_path }}/files/id_rsa"
+    pub_key_path: "{{ role_path }}/files/id_rsa.pub"
+
+- name: Create local pair of private/public keys (priv key must be added to Gitlab, or whereever you want to connect from)
+  local_action:
+    module: openssh_keypair
+    type: rsa
+    size: 4096
+    comment: ansible_local_key
+    path: "{{ key_path }}"
+    state: present
+
+- name: Add the public key that we have just generated to the local user on the controller machine/node.
+  local_action:
+    module: authorized_key
+    user: "{{ controller_enabled_user }}"
+    state: present
+    exclusive: no
+    # Assuming that this repo is inside ~/ansible
+    key_options: 'no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="~/ansible/ansible-remote.py"'
+    key: "{{ lookup('file', pub_key_path) }}"
+  when: controller_enabled_user is not empty

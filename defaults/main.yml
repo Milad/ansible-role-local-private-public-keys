@@ -1,0 +1,4 @@
+---
+
+# The user who will have the public key added to their authorized_key.
+controller_enabled_user: ""
